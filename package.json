@@ -1,0 +1,32 @@
+{
+  "name": "issue-tracker",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Issue Tracker API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "keywords": [
+    "API",
+    "MERN",
+    "Express",
+    "MongoDB",
+    "React",
+    "Node"
+  ],
+  "author": "Darbaz Ali",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "mongoose": "^5.10.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
