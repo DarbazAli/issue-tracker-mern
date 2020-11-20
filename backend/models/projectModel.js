@@ -18,8 +18,9 @@ const ProjectShema = new mongoose.Schema(
   {
     project: {
       type: String,
-      required: true,
+      required: 'Project name is required',
       trim: true,
+      unique: 'Project already exists',
     },
 
     issues: [IssueShema],
