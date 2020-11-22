@@ -48,9 +48,49 @@ LIST ALL ISSUES
 -------------------------------------------------*/
 const list = async (req, res) => {
   const { project } = req.params
+  const { open, creator } = req.query
+
   try {
     const { issues } = await Project.findOne({ project })
-    return res.status(200).json(issues)
+
+    // filter issue by open status
+    if (open) {
+      if (open === 'true') {
+        return res.status(200).json(issues.filter((x) => x.open === true))
+      } else {
+        return res.status(200).json(issues.filter((x) => x.open === false))
+      }
+    }
+
+    // filter by creator
+    if (creator && !open) {
+      return res.status(200).json(issues.filter((x) => x.creator === creator))
+    }
+
+    if (creator && open === 'true') {
+      return res
+        .status(200)
+        .json(
+          issues
+            .filter((x) => x.open === true)
+            .filter((x) => x.creator === 'creator')
+        )
+    }
+
+    if (creator && open === 'false') {
+      return res
+        .status(200)
+        .json(
+          issues
+            .filter((x) => x.open === false)
+            .filter((x) => x.creator === 'creator')
+        )
+    }
+
+    // return without filtering
+    else {
+      return res.status(200).json(issues)
+    }
   } catch (err) {
     return res.status(400).json({
       error: 'Project not found',
