@@ -6,7 +6,13 @@ import Project from '../models/projectModel.js'
 @access   Public
 --------------------------------------*/
 const create = async (req, res) => {
-  const { project, description } = req.body
+  let { project, description } = req.body
+  project = project
+    .split('')
+    .map((x) => x.toLowerCase())
+    .map((x) => x.replace(' ', '-'))
+    .join('')
+
   try {
     // check if project is already exists
     const isExist = await Project.findOne({ project })
