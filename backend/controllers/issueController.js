@@ -109,6 +109,8 @@ const update = async (req, res) => {
   const { project } = req.params
 
   const { id, title, text, creator, assigned_to, open } = req.body
+
+  if (!id) return res.status(400).json({ error: 'Missing id' })
   const newIssue = {
     title,
     text,
