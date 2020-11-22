@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const IssueShema = new mongoose.Schema({
-  id: String,
+  _id: String,
   title: String,
   text: String,
   creator: String,

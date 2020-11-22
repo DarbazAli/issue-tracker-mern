@@ -5,6 +5,8 @@ import cors from 'cors'
 
 // import custom modules
 import projectRoute from './routes/projectRoute.js'
+import issueRoute from './routes/issueRoute.js'
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -20,5 +22,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/', projectRoute)
+app.use('/', issueRoute)
 
 export default app
