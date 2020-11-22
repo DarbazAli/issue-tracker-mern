@@ -8,6 +8,6 @@ router
   .post(issueCtrl.create)
   .get(issueCtrl.list)
   .put(issueCtrl.update)
-  .delete()
+  .delete(issueCtrl.deleteIssue)
 
 export default router

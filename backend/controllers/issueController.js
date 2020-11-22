@@ -86,4 +86,25 @@ const update = async (req, res) => {
   }
 }
 
-export default { create, list, update }
+/*------------------------------------------------
+DELETE ISSUE
+-------------------------------------------------*/
+const deleteIssue = async (req, res) => {
+  const { project } = req.params
+  const { id } = req.body
+
+  try {
+    const deletedIssue = await Project.updateOne(
+      { project },
+      { $pull: { issues: { _id: id } } },
+      { new: true }
+    )
+    return res.status(200).json({
+      message: 'Issue deleted successfully',
+      issue: deletedIssue,
+    })
+  } catch (err) {
+    return res.status(400).json({ error: err })
+  }
+}
+export default { create, list, update, deleteIssue }
