@@ -14,6 +14,12 @@ const create = async (req, res) => {
   const { title, text, creator, assigned_to, open } = req.body
 
   try {
+    // check if project is available
+    const isExist = await Project.findOne({ project })
+    // if project is not available, then return with error
+    if (!isExist) return res.status(400).json({ error: 'Project not found' })
+
+    // else create new issue, and push it the issues array
     const newIssue = {
       _id: generate(),
       title,
@@ -27,7 +33,8 @@ const create = async (req, res) => {
       { project: project },
       { $push: { issues: newIssue } }
     )
-    return res.status(200).json(doc)
+    if (doc.ok)
+      return res.status(200).json({ message: 'New issue added successfully' })
   } catch (err) {
     return res.status(400).json({ error: err })
   }
@@ -51,4 +58,32 @@ const list = async (req, res) => {
   }
 }
 
-export default { create, list }
+/*------------------------------------------------
+UPDATE ISSUE
+-------------------------------------------------*/
+const update = async (req, res) => {
+  const { project } = req.params
+
+  const { id, title, text, creator, assigned_to, open } = req.body
+  const newIssue = {
+    _id: generate(),
+    title,
+    text,
+    creator,
+    assigned_to,
+    open: open === 'Open' ? true : false,
+  }
+
+  try {
+    const issue = await Project.updateOne(
+      { project: project, 'issues._id': id },
+      { $set: { 'issues.$': newIssue } }
+    )
+    if (issue.ok)
+      return res.status(200).json({ message: 'Issue updated successfully' })
+  } catch (err) {
+    return res.status(400).json({ error: err })
+  }
+}
+
+export default { create, list, update }

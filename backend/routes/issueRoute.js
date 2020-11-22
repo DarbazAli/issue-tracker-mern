@@ -7,7 +7,7 @@ router
   .route('/api/issues/:project')
   .post(issueCtrl.create)
   .get(issueCtrl.list)
-  .put()
+  .put(issueCtrl.update)
   .delete()
 
 export default router
