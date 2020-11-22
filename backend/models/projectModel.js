@@ -10,10 +10,7 @@ const IssueShema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  updated: {
-    type: Date,
-    default: Date.now,
-  },
+  updated: Date,
   open: Boolean,
 })
 

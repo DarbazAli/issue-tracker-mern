@@ -13,6 +13,9 @@ const create = async (req, res) => {
 
   const { title, text, creator, assigned_to, open } = req.body
 
+  if (!title || !text || !creator)
+    return res.status(400).json({ error: 'required field(s) missing' })
+
   try {
     // check if project is available
     const isExist = await Project.findOne({ project })
@@ -26,6 +29,7 @@ const create = async (req, res) => {
       text,
       creator,
       assigned_to,
+      created: Date.now().toString(),
       open: open === 'Open' ? true : false,
     }
 
@@ -48,7 +52,7 @@ LIST ALL ISSUES
 -------------------------------------------------*/
 const list = async (req, res) => {
   const { project } = req.params
-  const { open, creator } = req.query
+  let { open, creator } = req.query
 
   try {
     const { issues } = await Project.findOne({ project })
@@ -73,7 +77,7 @@ const list = async (req, res) => {
         .json(
           issues
             .filter((x) => x.open === true)
-            .filter((x) => x.creator === 'creator')
+            .filter((x) => x.creator === creator)
         )
     }
 
@@ -83,7 +87,7 @@ const list = async (req, res) => {
         .json(
           issues
             .filter((x) => x.open === false)
-            .filter((x) => x.creator === 'creator')
+            .filter((x) => x.creator === creator)
         )
     }
 
@@ -106,12 +110,12 @@ const update = async (req, res) => {
 
   const { id, title, text, creator, assigned_to, open } = req.body
   const newIssue = {
-    _id: generate(),
     title,
     text,
     creator,
     assigned_to,
-    open: open === 'Open' ? true : false,
+    updated: Date.now().toString(),
+    open: open.toLowerCase() === 'open' ? true : false,
   }
 
   try {
@@ -120,7 +124,9 @@ const update = async (req, res) => {
       { $set: { 'issues.$': newIssue } }
     )
     if (issue.ok)
-      return res.status(200).json({ message: 'Issue updated successfully' })
+      return res
+        .status(200)
+        .json({ message: 'Issue updated successfully', _id: newIssue._id })
   } catch (err) {
     return res.status(400).json({ error: err })
   }
