@@ -6,14 +6,18 @@ import Project from '../models/projectModel.js'
 @access   Public
 --------------------------------------*/
 const create = async (req, res) => {
-  const { project } = req.body
+  const { project, description } = req.body
   try {
     // check if project is already exists
     const isExist = await Project.findOne({ project })
-    if (isExist) return res.status(200).json(isExist)
+    if (isExist)
+      return res.status(400).json({
+        error: `'${project}' already exists`,
+      })
     else {
       const newProject = new Project({
-        project: project,
+        project,
+        description,
         issues: [],
       })
       const prj = await newProject.save()

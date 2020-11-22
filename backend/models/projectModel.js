@@ -23,6 +23,8 @@ const ProjectShema = new mongoose.Schema(
       unique: 'Project already exists',
     },
 
+    description: String,
+
     issues: [IssueShema],
   },
   { timestamps: true }
