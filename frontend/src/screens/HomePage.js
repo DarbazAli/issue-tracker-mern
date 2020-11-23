@@ -2,7 +2,7 @@ import React from 'react'
 import Projects from './Projects.js'
 const HomePage = () => {
   return (
-    <div>
+    <div className='home-page'>
       <Projects />
     </div>
   )

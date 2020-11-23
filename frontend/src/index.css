@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 500;
+}
+
+.home-page {
+  margin-top: 40px;
+  min-height: 80vh;
+}
+
+.error {
+  color: red;
+}

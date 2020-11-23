@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CardGroup } from 'react-bootstrap'
 import axios from 'axios'
 import ProjectCard from '../components/ProjectCard'
+import NewProjectForm from '../components/NewProjectForm'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
@@ -12,15 +13,15 @@ const Projects = () => {
       setProjects(data)
     }
     fetchProjects()
-  }, [])
+  }, [projects])
   return (
     <div>
-      <h3>List of all projects</h3>
-      <CardGroup>
-        {projects.map((project) => (
-          <ProjectCard project={project} key={project._id} />
-        ))}
-      </CardGroup>
+      <NewProjectForm />
+      <h3>Recent Projects</h3>
+
+      {projects.map((project) => (
+        <ProjectCard project={project} key={project._id} />
+      ))}
     </div>
   )
 }
