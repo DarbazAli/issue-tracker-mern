@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Projects from './Projects.js'
 const HomePage = () => {
   return (
     <div>
-      <h1>Home Page</h1>
+      <Projects />
     </div>
   )
 }
