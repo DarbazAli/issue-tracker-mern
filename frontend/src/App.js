@@ -1,9 +1,10 @@
-import { BrowserRouter } from 'react-router-dom'
-import { Route, Switch } from 'react-router'
+import { BrowserRouter, Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import HomePage from './screens/HomePage.js'
+import ProjectsPage from './screens/ProjectsPage.js'
 import Header from './components/Header.js'
 import Footer from './components/Footer.js'
+import ProjectDetail from './screens/ProjectDetail.js'
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
 
       <Switch>
         <Route path='/' exact component={HomePage} />
+        <Route path='/projects' component={ProjectsPage} />
+        <Route path='/issues/:project' children={<ProjectDetail />} />
       </Switch>
 
       <Footer />
