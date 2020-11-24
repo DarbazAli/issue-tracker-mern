@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import IssueList from '../components/IssueList'
+import NewFormIssue from '../components/NewFormIssue'
 
 const ProjectDetail = () => {
   const { project } = useParams()
@@ -13,18 +14,16 @@ const ProjectDetail = () => {
       setIssues(data)
     }
     fetchIssues()
-  }, [project])
+  }, [project, issues])
 
   return (
     <div className='container'>
+      <NewFormIssue project={project} />
       <h1>{project}</h1>
+      <h4>{issues.length} Issues</h4>
       <IssueList issues={issues} />
     </div>
   )
 }
 
 export default ProjectDetail
-
-// TODO: Create new issue form
-// TODO: Create Issue Card
-// TODO: Create Issue list

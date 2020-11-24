@@ -6,7 +6,7 @@ const Issue = ({ issue }) => {
       <h2>{issue.title}</h2>
       <p>{issue.text}</p>
       <p>Created by: {issue.creator}</p>
-      <p>Status {issue.open === true ? 'Open' : 'Closed'}</p>
+      <p>Status: {issue.open === true ? 'Open' : 'Closed'}</p>
       <p>Created at {issue.created}</p>
       <p>Last updated {issue.updated}</p>
     </div>

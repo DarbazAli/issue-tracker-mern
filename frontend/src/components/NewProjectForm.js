@@ -6,6 +6,16 @@ const NewProjectForm = () => {
   const [desc, setDesc] = useState('')
   const [error, setError] = useState('')
 
+  const handleNameChange = (e) => {
+    let { value } = e.target
+    value = value
+      .split('')
+      .map((x) => x.toLowerCase())
+      .map((x) => x.replace(/[\s_]/g, '-'))
+      .join('')
+    setName(value)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -26,7 +36,7 @@ const NewProjectForm = () => {
         name='name'
         type='text'
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={handleNameChange}
       />
       <input
         name='description'
