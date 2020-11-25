@@ -57,6 +57,9 @@ const list = async (req, res) => {
   try {
     const { issues } = await Project.findOne({ project })
 
+    // sort issues by created time
+    issues.sort((a, b) => b.created.getTime() - a.created.getTime())
+
     // filter issue by open status
     if (open) {
       if (open === 'true') {

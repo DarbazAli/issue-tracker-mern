@@ -45,6 +45,8 @@ const create = async (req, res) => {
 const list = async (req, res) => {
   try {
     const projects = await Project.find()
+    projects.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+
     if (!projects)
       return res.status(400).json({
         message: 'No projects found',
