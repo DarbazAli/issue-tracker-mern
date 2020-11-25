@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 const ProjectCard = ({ project }) => {
+  const issueLen = project.issues.length
   return (
     <div className='project-card'>
       <h4>
@@ -8,7 +9,7 @@ const ProjectCard = ({ project }) => {
       </h4>
 
       <p>
-        <b>{project.issues.length} Issues(s) </b>
+        <b>{issueLen <= 1 ? `${issueLen} Issue` : `${issueLen} Issues`} </b>
       </p>
 
       <p>{project.description}</p>

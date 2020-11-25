@@ -20,8 +20,8 @@ const ProjectDetail = () => {
     <div className='container'>
       <NewFormIssue project={project} />
       <h1>{project}</h1>
-      <h4>{issues.length} Issues</h4>
-      <IssueList issues={issues} />
+      <h4>{issues.length} Issues </h4>
+      <IssueList issues={issues} project={project} />
     </div>
   )
 }

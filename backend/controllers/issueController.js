@@ -146,14 +146,12 @@ const deleteIssue = async (req, res) => {
 
   try {
     const deletedIssue = await Project.updateOne(
-      { project },
+      { project: project },
       { $pull: { issues: { _id: id } } },
-      { new: true }
+      { safe: true }
     )
-    return res.status(200).json({
-      message: 'Issue deleted successfully',
-      issue: deletedIssue,
-    })
+
+    return res.status(200).json({ message: 'Issue deleted successfully' })
   } catch (err) {
     return res.status(400).json({ error: err })
   }
