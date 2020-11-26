@@ -7,12 +7,8 @@ const Projects = () => {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const { data } = await axios.get('/api/projects')
-      setProjects(data)
-    }
-    fetchProjects()
-  }, [projects])
+    return axios.get('/api/projects').then((res) => setProjects(res.data))
+  }, [])
   return (
     <div>
       <NewProjectForm />

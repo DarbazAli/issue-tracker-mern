@@ -14,6 +14,7 @@ const ProjectDetail = () => {
       setIssues(data)
     }
     fetchIssues()
+    return issues
   }, [project, issues])
 
   return (

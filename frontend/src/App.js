@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import HomePage from './screens/HomePage.js'
 import ProjectsPage from './screens/ProjectsPage.js'

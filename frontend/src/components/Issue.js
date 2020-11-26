@@ -1,16 +1,19 @@
 import React from 'react'
 import DeleteIssueForm from './DeleteIssueForm'
 
-const Issue = ({ issue, project }) => {
+const Issue = ({
+  issue: { title, text, creator, open, created, updated, _id },
+  project,
+}) => {
   return (
     <div className='issue-card'>
-      <h2>{issue.title}</h2>
-      <p>{issue.text}</p>
-      <p>Created by: {issue.creator}</p>
-      <p>Status: {issue.open === true ? 'Open' : 'Closed'}</p>
-      <p>Created at {issue.created}</p>
-      <p>Last updated {issue.updated}</p>
-      <DeleteIssueForm project={project} id={issue._id} />
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <p>Created by: {creator}</p>
+      <p>Status: {open === true ? 'Open' : 'Closed'}</p>
+      <p>Created at {created}</p>
+      <p>Last updated {updated}</p>
+      <DeleteIssueForm project={project} id={_id} />
     </div>
   )
 }
